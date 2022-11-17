@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\Table\MessagesTable;
 use Cake\Http\Response;
+use Cake\Mailer\Mailer;
 
 /**
  * Messages Controller
@@ -27,6 +28,13 @@ class MessagesController extends AppController
             $message = $this->Messages->patchEntity($message, $this->request->getData());
 
             if ($this->Messages->save($message)) {
+                $mailer = new Mailer('default');
+                $mailer->setFrom($message->email, $message->name)
+                    ->addReplyTo($message->email)
+                    ->setTo(env('EMAIL'))
+                    ->setSubject($message->subject)
+                    ->deliver($message->content);
+
                 $this->Flash->success(__('The message has been sent.'));
 
                 return $this->redirect(['action' => 'index']);
