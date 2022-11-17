@@ -19,7 +19,7 @@ use App\View\AppView;
                         echo $this->Form->control('email');
                         echo $this->Form->control('subject');
                         echo $this->Form->control('content');
-                        echo $this->Form->control('agreement_1');
+                        echo $this->Form->control('agreement_1', ['required' => true]);
                         echo $this->Form->control('agreement_2');
                     ?>
                 </fieldset>

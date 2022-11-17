@@ -162,6 +162,10 @@ th {
 .input.radio label:first-of-type {
     margin-bottom: 2.0rem;
 }
+.input.required label::after {
+    content: ' *';
+    color: #d33c43;
+}
 
 /* Paginator */
 .paginator {
